@@ -1,0 +1,29 @@
+vibe: "Anything CS, intellectually stimulating, and allows me to have a life"
+
+# For Phase 1, we restrict to 2 companies to test the pipeline
+target_companies:
+  - Microsoft
+  - Google
+
+dealbreakers:
+  - "no crypto"
+  - "poor work-life balance"
+  - "toxic culture"
+  - "non-technical roles"
+
+resume_summary:
+  name: "Raj Tripathi"
+  location: "Gurugram, India"
+  education:
+    - "BITS Pilani, Computer Science (BE) & Mathematics (MSc) — Dual Degree (CGPA: 9.12)"
+  experience:
+    - "American Express: Data Scientist → Senior Data Scientist (Aug 2024 – Apr 2026). Identified a production AI misalignment in an offline merchant recommender (~$10M portfolio); led cross-functional alignment across product, marketing, and analytics to pivot targeting strategy, deploying the fix to production and achieving 2x improvement via targeting precision (GCM). Developed an XGBoost-based response prediction system."
+    - "Amazon: Software Development Engineer Intern (Jan 2024 – Jun 2024). Migrated search infrastructure from legacy DynamoDB to AWS OpenSearch for a global logistics platform, achieving 10x latency improvement."
+  projects:
+    - "Agentic Job Scout — Multi-Agent Career Intelligence System"
+    - "NeoChat — OpenAI-Compatible LLM Orchestration Layer"
+  skills:
+    - "AI & Multi-Agent Systems: Google ADK, LangGraph, Gemini API, ReAct, RAG, Prompt Engineering"
+    - "Machine Learning: PyTorch, XGBoost, Sklearn"
+    - "Cloud & Data: Google Cloud (Firebase, Cloud Functions, Firestore), AWS, PySpark, SQL"
+    - "Engineering: Python, C++, Java, TS, FastAPI, React.js, System Design, OAuth 2.0"
