@@ -70,10 +70,11 @@ export async function sendNewsletter() {
         oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
         const gmail = google.gmail({ version: 'v1', auth: oAuth2Client });
 
+        const userEmail = process.env.GMAIL_USER_EMAIL || 'tripathiraj01@gmail.com';
         const utf8Subject = `=?utf-8?B?${Buffer.from("Your Weekly AI Job Scout Digest 🚀").toString('base64')}?=`;
         const messageParts = [
-            'From: AI Job Scout <me>',
-            'To: <me>', 
+            `From: ${userEmail}`,
+            `To: ${userEmail}`,
             'Content-Type: text/html; charset=utf-8',
             'MIME-Version: 1.0',
             `Subject: ${utf8Subject}`,
