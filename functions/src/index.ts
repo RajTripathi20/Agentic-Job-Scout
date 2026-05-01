@@ -1,3 +1,9 @@
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+
+// Load environment variables from .env.local (for local dev / emulator)
+dotenv.config({ path: path.join(__dirname, '../../.env.local') });
+
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 

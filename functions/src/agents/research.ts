@@ -1,8 +1,18 @@
-import { GoogleGenAI } from '@google/genai';
+import { ai, MODELS } from '../config/models';
+import { researchPrompt } from '../config/prompts';
 import { loadConfig, listingsCollection } from '../utils';
 
-// We initialize the client. It automatically uses process.env.GEMINI_API_KEY
-const ai = new GoogleGenAI({});
+/**
+ * Strips markdown code fences from LLM output.
+ */
+function stripCodeFences(text: string): string {
+    if (text.includes("```json")) {
+        return text.split("```json")[1].split("```")[0].trim();
+    } else if (text.includes("```")) {
+        return text.split("```")[1].split("```")[0].trim();
+    }
+    return text.trim();
+}
 
 export async function runResearchPhase() {
     const config = loadConfig();
@@ -13,52 +23,34 @@ export async function runResearchPhase() {
 
     for (const company of targetCompanies) {
         console.log(`Researching jobs for ${company}...`);
-        
-        const prompt = `
-            Find exactly 3 recent software engineering, AI, or data science job openings at ${company}.
-            Focus on roles that align with: "${config.vibe}".
-            Only return jobs posted in the last 7 days if possible.
-            You MUST return a JSON array where each object has:
-            - "title": the job title
-            - "company": "${company}"
-            - "url": the link to the job posting
-            - "description_snippet": a short summary of the role
-            Do NOT include markdown formatting like \`\`\`json. Return ONLY the raw JSON array.
-        `;
+
+        const prompt = researchPrompt(company, config.vibe);
 
         try {
             const response = await ai.models.generateContent({
-                model: 'gemini-2.5-pro',
+                model: MODELS.research.model,
                 contents: prompt,
                 config: {
-                    tools: [{ googleSearch: {} }],
-                    temperature: 0.1
-                }
+                    tools: MODELS.research.tools as any,
+                    temperature: MODELS.research.temperature,
+                },
             });
 
-            // Extract the JSON text.
-            let text = response.text || "[]";
-            if (text.includes("```json")) {
-                text = text.split("```json")[1].split("```")[0].trim();
-            } else if (text.includes("```")) {
-                text = text.split("```")[1].split("```")[0].trim();
-            }
-
+            const text = stripCodeFences(response.text || "[]");
             const jobs = JSON.parse(text);
 
             for (const job of jobs) {
-                // Use URL as document ID to prevent duplicates (base64 encoded)
+                // Use URL as document ID to prevent duplicates
                 const docId = Buffer.from(job.url).toString('base64').replace(/[/+=]/g, '');
-                
+
                 await listingsCollection.doc(docId).set({
                     ...job,
                     status: 'unprocessed',
-                    discovered_at: new Date().toISOString()
-                }, { merge: true }); 
-                
+                    discovered_at: new Date().toISOString(),
+                }, { merge: true });
+
                 totalJobsFound++;
             }
-
         } catch (error) {
             console.error(`Error researching ${company}:`, error);
         }

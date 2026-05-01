@@ -14,16 +14,58 @@ dealbreakers:
 resume_summary:
   name: "Raj Tripathi"
   location: "Gurugram, India"
-  education:
-    - "BITS Pilani, Computer Science (BE) & Mathematics (MSc) — Dual Degree (CGPA: 9.12)"
-  experience:
-    - "American Express: Data Scientist → Senior Data Scientist (Aug 2024 – Apr 2026). Identified a production AI misalignment in an offline merchant recommender (~$10M portfolio); led cross-functional alignment across product, marketing, and analytics to pivot targeting strategy, deploying the fix to production and achieving 2x improvement via targeting precision (GCM). Developed an XGBoost-based response prediction system."
-    - "Amazon: Software Development Engineer Intern (Jan 2024 – Jun 2024). Migrated search infrastructure from legacy DynamoDB to AWS OpenSearch for a global logistics platform, achieving 10x latency improvement."
-  projects:
-    - "Agentic Job Scout — Multi-Agent Career Intelligence System"
-    - "NeoChat — OpenAI-Compatible LLM Orchestration Layer"
-  skills:
-    - "AI & Multi-Agent Systems: Google ADK, LangGraph, Gemini API, ReAct, RAG, Prompt Engineering"
-    - "Machine Learning: PyTorch, XGBoost, Sklearn"
-    - "Cloud & Data: Google Cloud (Firebase, Cloud Functions, Firestore), AWS, PySpark, SQL"
-    - "Engineering: Python, C++, Java, TS, FastAPI, React.js, System Design, OAuth 2.0"
+  email: "tripathiraj01@gmail.com"
+  social_networks:
+    - network: "LinkedIn"
+      username: "raj-tripathi-59838a193"
+  sections:
+    education:
+      - institution: "BITS Pilani"
+        area: "Computer Science (BE) & Mathematics (MSc) — Dual Degree"
+        degree: ""
+        start_date: "2019-08"
+        end_date: "2024-06"
+        highlights:
+          - "CGPA: 9.12 | Coursework: Deep Learning, Design & Analysis of Algorithms, Optimization, Distributed Systems"
+    experience:
+      - company: "American Express"
+        position: "Data Scientist → Senior Data Scientist"
+        location: "Gurugram, India"
+        start_date: "2023-06"
+        end_date: "present"
+        highlights:
+          - "**Data Scientist** (Aug 2024 – Apr 2026): Identified a production AI misalignment in an offline merchant recommender (~$10M portfolio); led cross-functional alignment across product, marketing, and analytics to pivot targeting strategy, deploying the fix to production and achieving 2x improvement via targeting precision (GCM)"
+          - "**Data Scientist** (Aug 2024 – Apr 2026): Developed an XGBoost-based response prediction system using PySpark and Hive pipelines, reducing feature space from 70+ to 12 variables; optimized robustness via hyperparameter tuning and SHAP-driven explainability aligned with regulatory requirements"
+          - "**Data Science Intern** (Jun 2023 – Dec 2023): Led technical discovery with product and risk stakeholders to classify a high-risk 'Bonus Gamers' behavioral cohort; developed a risk-aware targeting framework delivering 7% incremental revenue lift while aligning model decisions with business requirements"
+      - company: "Amazon"
+        position: "Software Development Engineer Intern"
+        location: "Hyderabad, India"
+        start_date: "2024-01"
+        end_date: "2024-06"
+        highlights:
+          - "Migrated search infrastructure from legacy DynamoDB to AWS OpenSearch for a global logistics platform, achieving 10x latency improvement"
+          - "Architected production-level system design; managed cross-team stakeholder communication for API integration and cloud infrastructure migration (OpenSearch, Lambda, S3)"
+    projects:
+      - name: "[Agentic Job Scout](https://github.com/RajTripathi20/Agentic-Job-Scout) — Multi-Agent Career Intelligence System"
+        start_date: "2026-04"
+        end_date: "present"
+        highlights:
+          - "Architected a multi-agent system using Google ADK and Gemini API with hierarchical delegation: a Research Agent (web scraping via tool-calling), a Matching Agent (resume-JD semantic alignment with self-reflection), and a Notification Agent (personalized digest delivery via Gmail OAuth)"
+          - "Deployed as a scheduled agentic workflow on Firebase Cloud Functions with Firestore state management, delivering weekly personalized opportunity digests"
+      - name: "[NeoChat](https://github.com/RajTripathi20/neo-chat-api) — OpenAI-Compatible LLM Orchestration Layer"
+        start_date: "2025-01"
+        end_date: "2025-03"
+        highlights:
+          - "Built an OpenAI-compatible API proxy with multi-provider model routing, per-request cost tracking, rate limiting, and a pluggable processing pipeline (sanitization, intent classification, model selection) with API-key authentication"
+    Certifications and Achievements:
+      - bullet: "[PyTorch for Deep Learning Professional Certificate](https://learn.deeplearning.ai/certificates/67c9f415-e3d7-49c2-8191-412878fdaac4) — DeepLearning.AI (2026): Advanced Architectures & MLOps"
+      - bullet: "Competitive Programming: [Expert on Codeforces](https://codeforces.com/profile/tripathiraj01) — proficiency in complex algorithms, data structures, and system design under constraints"
+    skills:
+      - label: "AI & Multi-Agent Systems"
+        details: "Google ADK, LangGraph, Gemini API, ReAct / Self-Reflection / Hierarchical Delegation, MCP Tool-Calling, RAG, Prompt Engineering"
+      - label: "Machine Learning"
+        details: "PyTorch, XGBoost, Sklearn, Interpretability, LLM-Native Metrics (tokens/sec, cost-per-request)"
+      - label: "Cloud & Data"
+        details: "Google Cloud (Firebase, Cloud Functions, Firestore), AWS (OS, Lambda, S3), PySpark, Hive, SQL"
+      - label: "Engineering"
+        details: "Python, C++, Java, TS, FastAPI, React.js, System Design, Distributed Systems, OAuth 2.0, Git/CI-CD"
