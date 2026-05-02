@@ -1,17 +1,14 @@
 import { ai, MODELS } from '../config/models';
-import { researchPrompt } from '../config/prompts';
+import { researchPrompt, SearchFilters } from '../config/prompts';
+import { stripCodeFences } from '../config/helpers';
 import { loadConfig, listingsCollection } from '../utils';
 
 /**
- * Strips markdown code fences from LLM output.
+ * Checks if a job should be excluded based on hard keyword filters.
  */
-function stripCodeFences(text: string): string {
-    if (text.includes("```json")) {
-        return text.split("```json")[1].split("```")[0].trim();
-    } else if (text.includes("```")) {
-        return text.split("```")[1].split("```")[0].trim();
-    }
-    return text.trim();
+function shouldExclude(job: any, excludeKeywords: string[]): boolean {
+    const text = `${job.title} ${job.description_snippet} ${job.location || ''}`.toLowerCase();
+    return excludeKeywords.some(kw => text.toLowerCase().includes(kw.toLowerCase()));
 }
 
 export async function runResearchPhase() {
@@ -19,12 +16,20 @@ export async function runResearchPhase() {
     if (!config) throw new Error("Config not found");
 
     const targetCompanies = config.target_companies as string[];
+    const filters: SearchFilters = config.search_filters || {
+        target_locations: ['India', 'Remote'],
+        career_stage: 'early-career',
+        years_of_experience: 2,
+        exclude_keywords: [],
+    };
+
     let totalJobsFound = 0;
+    let totalExcluded = 0;
 
     for (const company of targetCompanies) {
         console.log(`Researching jobs for ${company}...`);
 
-        const prompt = researchPrompt(company, config.vibe);
+        const prompt = researchPrompt(company, config.vibe, filters);
 
         try {
             const response = await ai.models.generateContent({
@@ -40,6 +45,13 @@ export async function runResearchPhase() {
             const jobs = JSON.parse(text);
 
             for (const job of jobs) {
+                // Post-search hard filter: drop jobs matching exclude keywords
+                if (shouldExclude(job, filters.exclude_keywords)) {
+                    console.log(`  ✘ Excluded: "${job.title}" (matched exclude keyword)`);
+                    totalExcluded++;
+                    continue;
+                }
+
                 // Use URL as document ID to prevent duplicates
                 const docId = Buffer.from(job.url).toString('base64').replace(/[/+=]/g, '');
 
@@ -50,11 +62,13 @@ export async function runResearchPhase() {
                 }, { merge: true });
 
                 totalJobsFound++;
+                console.log(`  ✓ Found: "${job.title}" — ${job.location}`);
             }
         } catch (error) {
             console.error(`Error researching ${company}:`, error);
         }
     }
 
-    return { success: true, jobsFound: totalJobsFound };
+    console.log(`\nResearch complete: ${totalJobsFound} jobs saved, ${totalExcluded} excluded.`);
+    return { success: true, jobsFound: totalJobsFound, excluded: totalExcluded };
 }

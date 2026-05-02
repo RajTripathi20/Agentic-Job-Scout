@@ -5,6 +5,34 @@ target_companies:
   - Microsoft
   - Google
 
+# ─── Search Filters (used by Research Agent) ───
+search_filters:
+  # Only return jobs in these locations (or remote)
+  target_locations:
+    - "India"
+    - "Remote"
+    - "Hyderabad"
+    - "Bangalore"
+    - "Gurugram"
+    - "Mumbai"
+    - "Pune"
+  # Career stage helps scope seniority
+  career_stage: "early-career"  # early-career | mid-level | senior
+  years_of_experience: 2
+  # Hard exclude keywords — jobs containing these are dropped before Firestore
+  exclude_keywords:
+    - "security clearance"
+    - "US citizen"
+    - "DoD"
+    - "crypto"
+    - "blockchain"
+    - "web3"
+
+# ─── Digest Config (used by Notification Agent) ───
+digest:
+  high_match_threshold: 75    # Score above this = "high match"
+  min_jobs_to_show: 3         # Always show at least this many (top N fallback)
+
 dealbreakers:
   - "no crypto"
   - "poor work-life balance"
