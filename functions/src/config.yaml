@@ -1,21 +1,32 @@
-vibe: "Anything CS, intellectually stimulating, and allows me to have a life"
+vibe: "Anything CS(preferable if AI/ML), intellectually stimulating, and allows me to have a life. Would like to run my own thing one day, so FDE type roles that also expose to the business side are also welcome."
 
 # For Phase 1, we restrict to 2 companies to test the pipeline
 target_companies:
-  - Microsoft
   - Google
+  - Microsoft
+  - PayPal
+  - Cisco
+  - DB
+  - Barclays
+  - Walmart
+  - Atlassian
+  - Adobe
+  - SAP
+  - McKinsey
+  - Uber
+  - Nvidia
 
 # ─── Search Filters (used by Research Agent) ───
 search_filters:
   # Only return jobs in these locations (or remote)
   target_locations:
-    - "India"
+    # - "India"
     - "Remote"
-    - "Hyderabad"
-    - "Bangalore"
+    # - "Hyderabad"
+    # - "Bangalore"
     - "Gurugram"
-    - "Mumbai"
-    - "Pune"
+    # - "Mumbai"
+    # - "Pune"
   # Career stage helps scope seniority
   career_stage: "early-career"  # early-career | mid-level | senior
   years_of_experience: 2
